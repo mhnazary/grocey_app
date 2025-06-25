@@ -25,23 +25,13 @@ class _GroceryListState extends State<GroceryList> {
         itemCount: groceryItems.length,
         itemBuilder:
             (cts, index) => ListTile(
-              title: Text(
-                groceryItems[index].name,
-                style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                  color: Theme.of(context).colorScheme.onSecondary,
-                ),
-              ),
+              title: Text(groceryItems[index].name),
               leading: Container(
                 height: 24,
                 width: 24,
                 color: groceryItems[index].category.color,
               ),
-              trailing: Text(
-                groceryItems[index].quantity.toString(),
-                style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                  color: Theme.of(context).colorScheme.onSecondary,
-                ),
-              ),
+              trailing: Text(groceryItems[index].quantity.toString()),
             ),
       ),
     );
