@@ -29,43 +29,34 @@ class _GroceryListState extends State<GroceryList> {
 
   @override
   Widget build(BuildContext context) {
+    Widget content = Center(child: Text('No items added yet !!'));
+
+    if (_groceryItem.isNotEmpty) {
+      content = ListView.builder(
+        itemCount: _groceryItem.length,
+        itemBuilder:
+            (cts, index) => Dismissible(
+              key: ValueKey(_groceryItem[index].id),
+              onDismissed: (direction) => _groceryItem.removeAt(index),
+              child: ListTile(
+                title: Text(_groceryItem[index].name),
+                leading: Container(
+                  height: 24,
+                  width: 24,
+                  color: _groceryItem[index].category.color,
+                ),
+                trailing: Text(_groceryItem[index].quantity.toString()),
+              ),
+            ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Grocery App'),
         actions: [IconButton(onPressed: _addItem, icon: Icon(Icons.add))],
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          if (_groceryItem.isEmpty)
-            Center(
-              child: Text(
-                'You have no grocery Yet !!!! ',
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-            )
-          else
-            Expanded(
-              child: ListView.builder(
-                itemCount: _groceryItem.length,
-                itemBuilder:
-                    (cts, index) => Dismissible(
-                      key: ValueKey(_groceryItem[index].id),
-                      onDismissed: (direction) => _groceryItem.removeAt(index),
-                      child: ListTile(
-                        title: Text(_groceryItem[index].name),
-                        leading: Container(
-                          height: 24,
-                          width: 24,
-                          color: _groceryItem[index].category.color,
-                        ),
-                        trailing: Text(_groceryItem[index].quantity.toString()),
-                      ),
-                    ),
-              ),
-            ),
-        ],
-      ),
+      body: content,
     );
   }
 }
