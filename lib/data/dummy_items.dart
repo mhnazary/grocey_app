@@ -21,4 +21,10 @@ final groceryItems = [
     quantity: 1,
     category: categories[Categories.meat]!,
   ),
+  GroceryItems(
+    id: 'D',
+    name: 'chaply kabab',
+    quantity: 1,
+    category: categories[Categories.meat]!,
+  ),
 ];
